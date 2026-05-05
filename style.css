@@ -436,8 +436,8 @@ a { color: inherit; }
   flex-wrap: wrap;
   align-items: baseline;
 }
-.pricing-no-bs .no-bs-line { font-size: 1.3rem; font-weight: 700; color: var(--cloud); letter-spacing: -0.03em; line-height: 1.4; }
-.pricing-no-bs .no-bs-sub  { font-size: 0.9rem; color: var(--yellow); font-style: italic; line-height: 1.5; width: 100%; margin-top: 0.5rem; }
+.pricing-no-bs .no-bs-line { font-size: 1.3rem; font-weight: 700; color: #ffffff; letter-spacing: -0.03em; line-height: 1.4; }
+.pricing-no-bs .no-bs-sub  { font-size: 0.9rem; color: #ffffff; font-style: italic; line-height: 1.5; width: 100%; margin-top: 0.5rem; }
 .pricing-note { margin-top: 1.5rem; font-size: 0.8rem; color: var(--muted-light); font-style: italic; text-align: center; }
 
 /* ═══════════════════════════════════════
