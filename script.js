@@ -15,81 +15,94 @@ mobileMenu.querySelectorAll('a').forEach(link => {
 });
 
 // ─────────────────────────────────────────────
-// Calibrated Signal: animated pattern matching
+// Calibrated Signal:
+//   Foreground = fixed teal pattern (the locked target shape)
+//   Background = same pattern, scrolling in greyscale
+//   Every 4 seconds they naturally align → both flash yellow
 // ─────────────────────────────────────────────
 (function calibSignal() {
   const container = document.getElementById('calibBars');
   if (!container) return;
 
-  const targets = container.dataset.targets.split(',').map(Number);
-  const N = targets.length;
+  const N = parseInt(container.dataset.bars || '48', 10);
 
-  // Build DOM: each "bar" is a column with a background ghost (target shape)
-  // and a foreground bar (animated). When fg height matches bg target, both flash.
+  // Fixed target pattern — bell curve (peaks at center, tapers to edges)
+  // with asymmetric noise so left and right sides aren't a mirror.
+  const pattern = [];
+  const center = (N - 1) / 2;
+  const sigma = N / 3.4;
+  for (let i = 0; i < N; i++) {
+    const x = (i - center) / sigma;
+    const bell = 18 + 74 * Math.exp(-0.5 * x * x);
+    const noise = 10 * Math.sin(i * 0.71 + 0.4) + 5 * Math.sin(i * 1.37 + 1.1);
+    pattern.push(Math.max(15, Math.min(95, Math.round(bell + noise))));
+  }
+
+  // Per-bar hue: rainbow gradient (yellow → red → magenta → purple → blue → cyan)
+  function hueAt(i) {
+    return ((60 - (i / (N - 1)) * 240) + 360) % 360;
+  }
+
+  // Build DOM — fg height is set once and never changes; only bg moves.
   container.innerHTML = '';
-  const bars = [];
-  targets.forEach((t) => {
+  const cols = [];
+  for (let i = 0; i < N; i++) {
     const col = document.createElement('div');
     col.className = 'calib-col';
+    col.style.setProperty('--hue', hueAt(i));
     col.innerHTML = `
-      <div class="calib-bg" style="--h:${t}%"></div>
-      <div class="calib-fg" style="--h:0%"></div>
+      <div class="calib-bg" style="--h:${pattern[i]}%"></div>
+      <div class="calib-fg" style="--h:${pattern[i]}%"></div>
     `;
     container.appendChild(col);
-    bars.push(col);
-  });
+    cols.push(col);
+  }
 
-  let tick = 0;
-  const TICK_MS = 1000;       // 1 second per cycle
-  const MATCH_EVERY = 4;       // match once every 4 ticks (every 4 seconds)
-  const MATCH_HOLD_MS = 700;   // how long the "matched" flash lasts
+  // Animation timing: tune so bg completes one full cycle in ~4 seconds.
+  const SCROLL_DURATION_MS = 4000;
+  const TICK_MS = Math.round(SCROLL_DURATION_MS / N);  // ≈ 62ms at N=64
+  const MATCH_HOLD_MS = 1000;  // freeze + yellow flash duration
 
-  function rand(min, max) { return Math.floor(min + Math.random() * (max - min)); }
+  let scroll = 0;
+  let frozenUntil = 0;
 
-  function animate() {
-    tick++;
-    const isMatch = tick % MATCH_EVERY === 0;
+  function step() {
+    const now = performance.now();
 
-    bars.forEach((col, i) => {
-      const fg = col.querySelector('.calib-fg');
-      if (isMatch) {
-        // Snap to target
-        fg.style.setProperty('--h', targets[i] + '%');
-        col.classList.add('matched');
-      } else {
-        // Random fluctuation, biased away from target
-        let h;
-        do {
-          h = rand(15, 90);
-        } while (Math.abs(h - targets[i]) < 12);
-        fg.style.setProperty('--h', h + '%');
-        col.classList.remove('matched');
-      }
+    // While frozen (matching), do nothing — pattern stays aligned, color stays yellow.
+    if (now < frozenUntil) return;
+
+    // Just unfroze: clear the matched state and resume scrolling
+    if (frozenUntil > 0 && now >= frozenUntil) {
+      cols.forEach(col => col.classList.remove('matched'));
+      frozenUntil = 0;
+    }
+
+    scroll = (scroll + 1) % N;
+
+    // Update only background heights (foreground stays fixed)
+    cols.forEach((col, i) => {
+      const bg = col.querySelector('.calib-bg');
+      bg.style.setProperty('--h', pattern[(i + scroll) % N] + '%');
     });
 
-    if (isMatch) {
-      setTimeout(() => {
-        bars.forEach(col => col.classList.remove('matched'));
-      }, MATCH_HOLD_MS);
+    // When scroll wraps to 0, bg pattern aligns with fg → freeze + flash yellow
+    if (scroll === 0) {
+      cols.forEach(col => col.classList.add('matched'));
+      frozenUntil = now + MATCH_HOLD_MS;
     }
   }
 
-  // Initial random state
-  bars.forEach((col, i) => {
-    const fg = col.querySelector('.calib-fg');
-    fg.style.setProperty('--h', rand(15, 70) + '%');
-  });
-
-  // Respect reduced motion
+  // Reduced motion: just show the matched state
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) {
-    bars.forEach((col, i) => {
-      const fg = col.querySelector('.calib-fg');
-      fg.style.setProperty('--h', targets[i] + '%');
-      col.classList.add('matched');
-    });
+    cols.forEach(col => col.classList.add('matched'));
     return;
   }
 
-  setInterval(animate, TICK_MS);
+  // Start aligned: show one match flash, freeze for hold, then begin scrolling
+  cols.forEach(col => col.classList.add('matched'));
+  frozenUntil = performance.now() + MATCH_HOLD_MS;
+
+  setInterval(step, TICK_MS);
 })();
