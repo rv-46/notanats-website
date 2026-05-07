@@ -199,68 +199,40 @@
       </div>
 
       <div class="swimlane">
-
-        <!-- Header row -->
-        <div class="sl-corner"></div>
-        <div class="sl-col-head">
-          <span class="sl-stage-num">01</span>
-          <span class="sl-stage-name">Setup</span>
-          <span class="sl-stage-note">Criteria locked before any candidate sees the link</span>
-        </div>
-        <div class="sl-col-head">
-          <span class="sl-stage-num">02</span>
-          <span class="sl-stage-name">Assessment</span>
-          <span class="sl-stage-note">Gaming the system requires having actually done the work</span>
-        </div>
-        <div class="sl-col-head">
-          <span class="sl-stage-num">03</span>
-          <span class="sl-stage-name">Advancement</span>
-          <span class="sl-stage-note">No manual shortlisting: the criteria make the call</span>
-        </div>
-        <div class="sl-col-head">
-          <span class="sl-stage-num">04</span>
-          <span class="sl-stage-name">Outcome</span>
-          <span class="sl-stage-note">The pool improves: candidates who did not advance may yet surface</span>
-        </div>
-        <div class="sl-col-head">
-          <span class="sl-stage-num">05</span>
-          <span class="sl-stage-name">Feedback</span>
-          <span class="sl-stage-note">Every hire makes the next screen more accurate</span>
+        <div class="sl-stage-labels">
+          <span><b>01</b> Setup<small>Criteria locked before any candidate sees the link</small></span>
+          <span><b>02</b> Assessment<small>Gaming the system requires having actually done the work</small></span>
+          <span><b>03</b> Advancement<small>No manual shortlisting: the criteria make the call</small></span>
+          <span><b>04</b> Outcome<small>The pool improves: candidates who did not advance may yet surface</small></span>
+          <span><b>05</b> Feedback<small>Every hire makes the next screen more accurate</small></span>
         </div>
 
-        <!-- Manager lane -->
-        <div class="sl-row-label sl-label--manager">
-          <span class="pf-dot pf-dot--manager"></span>
-          Hiring Manager
+        <div class="sl-row sl-row--m">
+          <div class="sl-rl"><span class="pf-dot pf-dot--manager"></span>Hiring Manager</div>
+          <div class="sl-card">Calibration conversation: defines what the role requires, what strong performance looks like, and what evidence indicates genuine capability. Activates the position with one click.</div>
+          <div class="sl-card sl-void"></div>
+          <div class="sl-card">Conducts interviews with candidates who passed the screen.</div>
+          <div class="sl-card">Records what interviews revealed: which dimensions predicted accurately, which did not. Makes the offer decision.</div>
+          <div class="sl-card">Receives a 3-month pulse check. The next search starts sharper than the last.</div>
         </div>
-        <div class="sl-cell sl-cell--manager">Calibration conversation: defines what the role requires, what strong performance looks like, and what evidence indicates genuine capability. Activates the position with one click.</div>
-        <div class="sl-cell sl-cell--manager sl-cell--void"></div>
-        <div class="sl-cell sl-cell--manager">Conducts interviews with candidates who passed the screen.</div>
-        <div class="sl-cell sl-cell--manager">Records what interviews revealed: which dimensions predicted accurately, which did not. Makes the offer decision.</div>
-        <div class="sl-cell sl-cell--manager">Receives a 3-month pulse check. The next search starts sharper than the last.</div>
 
-        <!-- notanATS lane -->
-        <div class="sl-row-label sl-label--system">
-          <span class="pf-dot pf-dot--system"></span>
-          notanATS
+        <div class="sl-row sl-row--s">
+          <div class="sl-rl"><span class="pf-dot pf-dot--system"></span>notanATS</div>
+          <div class="sl-card">Challenges vague criteria until each dimension is specific enough to score against. Locks the scoring surface. Generates a candidate link and opens the collection window.</div>
+          <div class="sl-card">Conducts a 30-minute conversation about actual work history. Scores semantically against locked criteria. The scoring surface is never exposed to the candidate.</div>
+          <div class="sl-card">Once the pool threshold is reached, automatically advances top candidates and sends interview scheduling options.</div>
+          <div class="sl-card">Detects which criteria misfired. Recalibrates only those dimensions. Rescores the entire pool: candidates who did not advance the first time are re-evaluated against the updated model.</div>
+          <div class="sl-card">Sends comparative feedback to every candidate who completed the assessment. Updates the calibration model with hire performance data.</div>
         </div>
-        <div class="sl-cell sl-cell--system">Challenges vague criteria until each dimension is specific enough to score against. Locks the scoring surface. Generates a candidate link and opens the collection window.</div>
-        <div class="sl-cell sl-cell--system">Conducts a 30-minute conversation about actual work history. Scores semantically against locked criteria. The scoring surface is never exposed to the candidate.</div>
-        <div class="sl-cell sl-cell--system">Once the pool threshold is reached, automatically advances top candidates and sends interview scheduling options.</div>
-        <div class="sl-cell sl-cell--system">Detects which criteria misfired. Recalibrates only those dimensions. Rescores the entire pool: candidates who did not advance the first time are re-evaluated against the updated model.</div>
-        <div class="sl-cell sl-cell--system">Sends comparative feedback to every candidate who completed the assessment. Updates the calibration model with hire performance data.</div>
 
-        <!-- Candidate lane -->
-        <div class="sl-row-label sl-label--candidate">
-          <span class="pf-dot pf-dot--candidate"></span>
-          Candidate
+        <div class="sl-row sl-row--c">
+          <div class="sl-rl"><span class="pf-dot pf-dot--candidate"></span>Candidate</div>
+          <div class="sl-card sl-void"></div>
+          <div class="sl-card">Receives link, books a screening slot. Describes experience in their own words: no rubric to reverse-engineer.</div>
+          <div class="sl-card">Top candidates receive a scheduling link and attend the interview.</div>
+          <div class="sl-card sl-void"></div>
+          <div class="sl-card">Receives feedback: where they stood against the pool on each dimension. Not a template. Not silence.</div>
         </div>
-        <div class="sl-cell sl-cell--candidate sl-cell--void"></div>
-        <div class="sl-cell sl-cell--candidate">Receives link, books a screening slot. Describes experience in their own words: no rubric to reverse-engineer.</div>
-        <div class="sl-cell sl-cell--candidate">Top candidates receive a scheduling link and attend the interview.</div>
-        <div class="sl-cell sl-cell--candidate sl-cell--void"></div>
-        <div class="sl-cell sl-cell--candidate">Receives feedback: where they stood against the pool on each dimension. Not a template. Not silence.</div>
-
       </div>
 
       <div class="core-diff">
