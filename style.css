@@ -527,12 +527,12 @@ a { color: inherit; }
   animation: pulse 1.8s infinite;
 }
 @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(40,201,183,0); } 100% { box-shadow: 0 0 0 0 rgba(40,201,183,0); } }
-.calib-sub { font-size: 0.78rem; color: var(--muted-dark); font-style: italic; }
+.calib-sub { font-size: 0.78rem; color: #ffffff; font-style: italic; }
 
 .calib-bars {
   display: flex;
   align-items: center;        /* center bars vertically — mirror axis */
-  gap: 1px;
+  gap: 3px;
   height: 150px;
   padding: 0.5rem 0;
   position: relative;
@@ -602,7 +602,7 @@ a { color: inherit; }
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--muted-dark);
+  color: #ffffff;
   font-style: italic;
   padding-top: 0.75rem;
   border-top: 1px solid var(--border-dark);
