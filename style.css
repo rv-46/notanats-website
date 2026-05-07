@@ -541,8 +541,9 @@ a { color: inherit; }
 
 .calib-bars {
   display: flex;
-  align-items: center;        /* center bars vertically — mirror axis */
-  gap: 3px;
+  align-items: center;          /* mirror around horizontal axis */
+  justify-content: space-between; /* bars span edge-to-edge */
+  gap: 4px;
   height: 150px;
   padding: 0.5rem 0;
   position: relative;
@@ -559,10 +560,9 @@ a { color: inherit; }
   pointer-events: none;
 }
 .calib-col {
-  flex: 1;
+  flex: 0 0 3px;     /* fixed thin width, doesn't grow */
   position: relative;
   height: 100%;
-  min-width: 2px;
 }
 .calib-bg, .calib-fg {
   position: absolute;

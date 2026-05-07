@@ -30,12 +30,12 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   // with asymmetric noise so left and right sides aren't a mirror.
   const pattern = [];
   const center = (N - 1) / 2;
-  const sigma = N / 3.4;
+  const sigma = N / 3.2;
   for (let i = 0; i < N; i++) {
     const x = (i - center) / sigma;
-    const bell = 18 + 74 * Math.exp(-0.5 * x * x);
-    const noise = 10 * Math.sin(i * 0.71 + 0.4) + 5 * Math.sin(i * 1.37 + 1.1);
-    pattern.push(Math.max(15, Math.min(95, Math.round(bell + noise))));
+    const bell = 14 + 84 * Math.exp(-0.5 * x * x);   // taller peak, lower edges
+    const noise = 8 * Math.sin(i * 0.71 + 0.4) + 4 * Math.sin(i * 1.37 + 1.1);
+    pattern.push(Math.max(12, Math.min(98, Math.round(bell + noise))));
   }
 
   // Per-bar hue: rainbow gradient (yellow → red → magenta → purple → blue → cyan)
