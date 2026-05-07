@@ -543,7 +543,7 @@ a { color: inherit; }
   display: flex;
   align-items: center;          /* mirror around horizontal axis */
   justify-content: space-between; /* bars span edge-to-edge */
-  gap: 4px;
+  gap: 1.875px;                  /* 1.25× the bar width */
   height: 150px;
   padding: 0.5rem 0;
   position: relative;
@@ -560,7 +560,7 @@ a { color: inherit; }
   pointer-events: none;
 }
 .calib-col {
-  flex: 0 0 3px;     /* fixed thin width, doesn't grow */
+  flex: 0 0 1.5px;   /* fixed thin width (half of previous), doesn't grow */
   position: relative;
   height: 100%;
 }
