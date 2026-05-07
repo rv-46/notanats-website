@@ -5,9 +5,19 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
-  background: #f4efe5;
-  color: #0f1a26;
+  background:
+    linear-gradient(to bottom,
+      #5fa57a 0%,      /* top - light green */
+      #3d8a5c 18%,     /* hero / problem */
+      #1f6b40 38%,     /* solution / how-it-works / features */
+      #0a4a2a 65%,     /* arena / candidate */
+      #004225 82%,     /* get-started */
+      #002818 100%     /* footer */
+    );
+  background-attachment: fixed;
+  color: var(--cloud);
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
 /* ═══════════════════════════════════════
@@ -123,8 +133,8 @@ a { color: inherit; }
    HERO
 ═══════════════════════════════════════ */
 .hero {
-  background: var(--navy);
-  background-image: radial-gradient(rgba(226,238,255,0.06) 1px, transparent 1px);
+  background: transparent;
+  background-image: radial-gradient(rgba(245,240,232,0.10) 1px, transparent 1px);
   background-size: 28px 28px;
   padding: clamp(3.5rem, 8vw, 6rem) var(--px) 0;
   overflow: hidden;
@@ -184,25 +194,25 @@ a { color: inherit; }
    SECTIONS
 ═══════════════════════════════════════ */
 .section { padding: clamp(4rem, 9vw, 7rem) var(--px); }
-.section--cream   { background: var(--cream); color: var(--ink); }
-.section--navy    { background: var(--navy);  color: var(--cloud); }
+.section--cream   { background: transparent; color: var(--cloud); }
+.section--navy    { background: transparent; color: var(--cloud); }
 .section--bordered { border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
 .section-inner    { max-width: var(--max-w); margin: 0 auto; }
 .section-header-split { display: grid; grid-template-columns: 0.3fr 0.7fr; gap: 2rem; margin-bottom: 3.5rem; align-items: start; }
-.display-h2 { font-size: clamp(2.25rem, 5vw, 4.25rem); line-height: 0.93; }
+.display-h2 { font-size: clamp(2.25rem, 5vw, 4.25rem); line-height: 0.93; color: var(--cloud); }
 .display-h2--light { color: var(--cloud); }
-.section-desc { margin-top: 1rem; font-size: 1.05rem; color: var(--muted-light); line-height: 1.65; max-width: 560px; }
+.section-desc { margin-top: 1rem; font-size: 1.05rem; color: var(--muted-dark); line-height: 1.65; max-width: 560px; }
 .section-desc--light { color: var(--muted-dark); }
 
 /* ═══════════════════════════════════════
    PROBLEM
 ═══════════════════════════════════════ */
 .problem-list { display: flex; flex-direction: column; }
-.problem-item { display: grid; grid-template-columns: 48px 1fr; gap: 1.25rem; padding: 2rem 0; border-top: 1px solid var(--border-light); align-items: start; }
-.problem-item:last-child { border-bottom: 1px solid var(--border-light); }
+.problem-item { display: grid; grid-template-columns: 48px 1fr; gap: 1.25rem; padding: 2rem 0; border-top: 1px solid var(--border-dark); align-items: start; }
+.problem-item:last-child { border-bottom: 1px solid var(--border-dark); }
 .problem-icon { font-size: 1.25rem; font-weight: 900; color: var(--coral); margin-top: 0.1rem; }
-.problem-item strong { display: block; font-size: 1.15rem; margin-bottom: 0.6rem; letter-spacing: -0.02em; }
-.problem-item p { font-size: 1rem; color: var(--muted-light); }
+.problem-item strong { display: block; font-size: 1.15rem; color: var(--cloud); margin-bottom: 0.6rem; letter-spacing: -0.02em; }
+.problem-item p { font-size: 1rem; color: var(--muted-dark); }
 
 /* ═══════════════════════════════════════
    SOLUTION
@@ -244,7 +254,7 @@ a { color: inherit; }
 .feature-card--pricing p  { color: var(--muted-dark); }
 .feature-num { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--coral); font-weight: 500; }
 .feature-num--light { color: var(--yellow); flex-shrink: 0; }
-.feature-card h3 { font-size: 1.05rem; letter-spacing: -0.025em; line-height: 1.2; }
+.feature-card h3 { font-size: 1.05rem; letter-spacing: -0.025em; line-height: 1.2; color: var(--ink); }
 .feature-card p { font-size: 0.92rem; color: var(--muted-light); line-height: 1.6; }
 
 /* ═══════════════════════════════════════
@@ -612,7 +622,7 @@ a { color: inherit; }
    GET STARTED CTA (employer)
 ═══════════════════════════════════════ */
 .cta-ghost {
-  background: linear-gradient(180deg, var(--navy) 0%, #002818 100%);
+  background: transparent;
   padding: clamp(4rem, 8vw, 6rem) var(--px);
   color: var(--cloud);
 }
@@ -658,10 +668,10 @@ a { color: inherit; }
 /* ═══════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════ */
-.footer { background: var(--navy); color: var(--cloud); padding: 2rem var(--px); border-top: 1px solid var(--border-dark); }
+.footer { background: transparent; color: var(--cloud); padding: 2rem var(--px); border-top: 1px solid var(--border-dark); }
 .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
 .footer p { font-size: 0.875rem; color: var(--muted-dark); }
-.footer-easter-egg { font-style: italic; font-size: 0.78rem !important; margin-left: auto; opacity: 0.5; }
+.footer-easter-egg { font-style: italic; font-size: 0.78rem !important; margin-left: auto; color: #ffffff; opacity: 1; }
 
 /* ═══════════════════════════════════════
    RESPONSIVE
