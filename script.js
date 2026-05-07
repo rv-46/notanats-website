@@ -41,8 +41,8 @@ mobileMenu.querySelectorAll('a').forEach(link => {
 
   let tick = 0;
   const TICK_MS = 1000;       // 1 second per cycle
-  const MATCH_EVERY = 8;       // match once every 8 ticks
-  const MATCH_HOLD_MS = 900;   // how long the "matched" flash lasts
+  const MATCH_EVERY = 4;       // match once every 4 ticks (every 4 seconds)
+  const MATCH_HOLD_MS = 700;   // how long the "matched" flash lasts
 
   function rand(min, max) { return Math.floor(min + Math.random() * (max - min)); }
 
