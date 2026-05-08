@@ -28,17 +28,12 @@ mobileMenu.querySelectorAll('a').forEach(link => {
 
   // Fixed target pattern — bell curve (peaks at center, tapers to edges)
   // with asymmetric noise so left and right sides aren't a mirror.
-  // Lopsided bell curve — peak shifted left of center, gentler left slope,
-  // steeper right slope. Sharp peak in the middle area.
   const pattern = [];
-  const peakAt = (N - 1) * 0.42;
-  const sigmaL = N / 3.4;   // gentler descent toward the left edge
-  const sigmaR = N / 5.5;   // steeper descent toward the right edge
+  const center = (N - 1) / 2;
+  const sigma = N / 4;
   for (let i = 0; i < N; i++) {
-    const dx = i - peakAt;
-    const sigma = dx < 0 ? sigmaL : sigmaR;
-    const x = dx / sigma;
-    const bell = 8 + 92 * Math.exp(-0.5 * x * x);
+    const x = (i - center) / sigma;
+    const bell = 8 + 90 * Math.exp(-0.5 * x * x);   // very tall center, short edges
     const noise = 6 * Math.sin(i * 0.71 + 0.4) + 3 * Math.sin(i * 1.37 + 1.1);
     pattern.push(Math.max(8, Math.min(99, Math.round(bell + noise))));
   }
